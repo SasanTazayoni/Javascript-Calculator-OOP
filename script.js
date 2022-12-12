@@ -15,31 +15,9 @@ class Calculator {
         this.currentInput = this.currentInput.toString().slice(0, -1);
     }
 
-    validateSign() {
-        if (this.currentInput === '') return;
-        else this.reverseSign();
-    }
-
-    reverseSign() {
-        let value;
-        const current = parseFloat(this.currentInput);
-        if (isNaN(current)) return;
-        else {
-            value = current * -1;
-            this.currentInput = value;
-        }
-    }
-
-    clearOnNextInput () {
-        this.clear();
-        this.clearOnNext = false;
-    }
-
     appendNumber(number) {
         if (number === '.' && this.currentInput.includes('.')) return;
-        if (this.clearOnNext) {
-            this.clearOnNextInput();
-        }
+        if (number === '0' && this.currentInput === '0') return;
         this.currentInput = this.currentInput.toString() + number.toString();
     }
 
@@ -60,9 +38,11 @@ class Calculator {
         if (isNaN(first) || isNaN(second)) return;
         switch (this.operation) {
             case '+':
+                if (!second) second = first;
                 calculation = first + second;
                 break;
             case '-':
+                if (!second) second = first;
                 calculation = first - second;
                 break;
             case '*':
@@ -86,10 +66,6 @@ class Calculator {
         } else {
             return value;
         }
-    }
-
-    setClearOnNextInput () {
-        this.clearOnNext = true;
     }
 
     updateDisplay() {
@@ -130,16 +106,10 @@ operationButtons.forEach(button => {
 equalsButton.addEventListener('click', () => {
     calculator.operate();
     calculator.updateDisplay();
-    calculator.setClearOnNextInput();
 });
 
 allClearButton.addEventListener('click', () => {
     calculator.clear();
-    calculator.updateDisplay();
-});
-
-signButton.addEventListener('click', button => {
-    calculator.validateSign(button.innerText);
     calculator.updateDisplay();
 });
 
