@@ -1,0 +1,79 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: linear-gradient(to left, lightskyblue, rgb(255, 215, 140));
+    margin: 0;
+    padding: 0;
+}
+
+.calculator {
+    align-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(6, 100px);
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.calculator > button {
+    border: 2px solid rgb(49, 36, 36);
+    cursor: pointer;
+    font-size: 2rem;
+    outline: none;
+}
+
+.operand, .decimal {
+    background-color: rgb(104, 103, 103);
+    transition: 0.2s;
+}
+
+.operand:hover,
+.decimal:hover {
+    background-color: rgb(180, 178, 178);
+}
+
+.special {
+    background-color: rgb(167, 167, 253);
+    transition: 0.2s;
+}
+
+.special:hover {
+    background-color: rgb(214, 214, 255);
+}
+
+.operator {
+    background-color: orange;
+    transition: 0.2s;
+}
+
+.operator:hover {
+    background-color: rgb(255, 195, 82);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.output {
+    align-items: flex-end;
+    background-color: lightgrey;
+    border: 5px solid rgb(49, 36, 36);
+    display: flex;
+    flex-direction: column;
+    grid-column: 1 / -1;
+    justify-content: space-around;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.output .previous-input {
+    opacity: 50%;
+    font-size: 1.5rem;
+}
+
+.output .current-input {
+    font-size: 2.5rem;
+}
