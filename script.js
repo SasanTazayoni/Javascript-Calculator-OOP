@@ -22,7 +22,11 @@ class Calculator {
     }
 
     validate(operation) {
-        if (this.currentInput === '') return;
+        if (this.currentInput === '' && this.previousInput === '') return;
+        if (this.currentInput === '' && this.previousInput !== '') {
+            this.operation = operation;
+            return;
+        }
         if (this.previousInput !== '') {
             this.operate();
         };
@@ -34,15 +38,14 @@ class Calculator {
     operate() {
         let calculation;
         const first = parseFloat(this.previousInput);
-        const second = parseFloat(this.currentInput);
-        if (isNaN(first) || isNaN(second)) return;
+        let second = parseFloat(this.currentInput);
+        if (isNaN(first)) return;
+        if (isNaN(second)) second = first;
         switch (this.operation) {
             case '+':
-                if (!second) second = first;
                 calculation = first + second;
                 break;
             case '-':
-                if (!second) second = first;
                 calculation = first - second;
                 break;
             case '*':
@@ -74,7 +77,6 @@ class Calculator {
             this.previousInputText.innerText = 
                 `${this.previousInput} ${this.operation}`;
         } else this.previousInputText.innerText = '';
-        console.log(this.currentInput);
     }
 }
 
