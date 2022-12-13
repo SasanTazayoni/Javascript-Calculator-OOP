@@ -15,6 +15,22 @@ class Calculator {
         this.currentInput = this.currentInput.toString().slice(0, -1);
     }
 
+    validatePlusMinus() {
+        if (this.currentInput === '') return;
+        else this.reverseSign();
+    }
+
+    reverseSign() {
+        let value;
+        const current = parseFloat(this.currentInput);
+        if (isNaN(current)) return;
+        else {
+            value = current * -1;
+            this.currentInput = value;
+        }
+    }
+
+
     appendNumber(number) {
         if (number === '.' && this.currentInput.includes('.')) return;
         if (number === '0' && this.currentInput === '0') return;
@@ -112,6 +128,11 @@ equalsButton.addEventListener('click', () => {
 
 allClearButton.addEventListener('click', () => {
     calculator.clear();
+    calculator.updateDisplay();
+});
+
+signButton.addEventListener('click', () => {
+    calculator.validatePlusMinus();
     calculator.updateDisplay();
 });
 
