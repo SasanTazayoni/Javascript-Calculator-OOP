@@ -167,6 +167,13 @@ signButton.addEventListener('click', () => {
     calculator.updateDisplay();
 });
 
+document.addEventListener('keydown', e => {
+    if (e.key === '\\') {
+            calculator.validatePlusMinus();
+        }
+        calculator.updateDisplay();
+});
+
 deleteButton.addEventListener('click', () => {
     calculator.delete();
     calculator.updateDisplay();
