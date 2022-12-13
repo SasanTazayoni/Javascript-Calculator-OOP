@@ -114,6 +114,15 @@ numberButtons.forEach(button => {
     });
 });
 
+document.addEventListener('keydown', e => {
+    const numbersArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
+    if (numbersArray.includes(e.key)) {
+            calculator.appendNumber(e.key);
+        }
+        calculator.updateDisplay();
+});
+
+
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
         calculator.validate(button.innerText);
@@ -121,14 +130,36 @@ operationButtons.forEach(button => {
     });
 });
 
+document.addEventListener('keydown', e => {
+    const operatorsArray = ['+', '-', '*', '/'];
+    if (operatorsArray.includes(e.key)) {
+            calculator.validate(e.key);
+        }
+        calculator.updateDisplay();
+});
+
 equalsButton.addEventListener('click', () => {
     calculator.operate();
     calculator.updateDisplay();
 });
 
+document.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+            calculator.operate();
+        }
+        calculator.updateDisplay();
+});
+
 allClearButton.addEventListener('click', () => {
     calculator.clear();
     calculator.updateDisplay();
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+            calculator.clear();
+        }
+        calculator.updateDisplay();
 });
 
 signButton.addEventListener('click', () => {
@@ -139,4 +170,11 @@ signButton.addEventListener('click', () => {
 deleteButton.addEventListener('click', () => {
     calculator.delete();
     calculator.updateDisplay();
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Backspace') {
+            calculator.delete();
+        }
+        calculator.updateDisplay();
 });
